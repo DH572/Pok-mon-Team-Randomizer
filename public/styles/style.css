@@ -1,0 +1,35 @@
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+td {
+  text-align: center;
+  vertical-align: center;
+}
+
+.gradient-background {
+  background: linear-gradient(300deg, #2fbeea, #307fff, #a9e5ff);
+  background-size: 180% 180%;
+  animation: gradient-animation 18s ease infinite;
+}
+
+.pokemon-image {
+  height: 110px;
+  width: 110px;
+}
+
+.item-image {
+  height: 50px;
+  width: 50px;
+}
+
+.move-list {
+  text-align: left;
+}

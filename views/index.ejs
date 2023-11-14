@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokemon Team Randomizer</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
+  <body>
+    <header class="d-flex flex-wrap justify-content-center py-3 border-bottom">
+      <div
+        class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+      >
+        <svg class="bi me-2" width="40" height="32">
+          <use xlink:href="#bootstrap"></use>
+        </svg>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/640px-Pok%C3%A9_Ball_icon.svg.png"
+          alt="Pokeball Image"
+          height="40px"
+        />
+        <span class="fs-4">&nbsp; POKEMON TEAM RANDOMIZER</span>
+      </div>
+    </header>
+    <div class="container gradient-background mt-5 ms-5 py-3">
+      <form id="myForm" method="post">
+        <div class="d-flex flex-column px-0">
+          <div>
+            <input
+              type="checkbox"
+              id="abilityInput"
+              name="ability"
+              value="no"
+            />
+            <label for="abilityInput">No Ability</label>
+          </div>
+          <div>
+            <input type="checkbox" id="movesInput" name="moves" value="no" />
+            <label for="movesInput">No Moves</label>
+          </div>
+          <div class="pb-3">
+            <input type="checkbox" id="itemInput" name="item" value="no" />
+            <label for="itemInput">No Item</label>
+          </div>
+        </div>
+
+        <input
+          id="get"
+          type="submit"
+          value="Random Pokemon"
+          formaction="/get-random"
+        />
+        <input
+          id="get"
+          type="submit"
+          value="Random Team"
+          formaction="/get-random-team"
+        />
+      </form>
+    </div>
+    <div class="containter d-flex mx-5 my-5 pl-5">
+      <%if (locals.pokemonName){%>
+      <form class="reroll" method="post">
+        <table class="ml-5">
+          <tr>
+            <th>Name:</th>
+            <th>Image:</th>
+            <%if (pokemonAbility != "N/A"){%>
+            <th>Ability:</th>
+            <%}%> <%if (pokemonMoves != "N/A"){%>
+            <th>Moveset:</th>
+            <%}%> <%if (pokemonItem != "N/A"){%>
+            <th>Item:</th>
+            <th>Item Image:</th>
+            <%}%>
+          </tr>
+          <%for (var x = 0; x < pokemonName.length; x++){%>
+          <tr>
+            <td><%= pokemonName[x] %></td>
+            <td align="center">
+              <img
+                class="pokemon-image align-items-start"
+                src="<%= pokemonImage[x] %>"
+                alt="pokemon image"
+              />
+            </td>
+            <%if (pokemonAbility != "N/A"){%>
+            <td>
+              <%= pokemonAbility[x] %>
+              <input
+                type="checkbox"
+                id="pokeAbility"
+                name="rerollAbility<%=x%>"
+                value="yes"
+              />
+            </td>
+            <%}%> <%if (pokemonMoves != "N/A"){%>
+            <td>
+              <ol class="move-list my-0">
+                <%for (var i = 0; i < pokemonMoves[x].length; i++){%>
+                <li><%=pokemonMoves[x][i]%></li>
+                <%}%>
+              </ol>
+              <input
+                type="checkbox"
+                id="pokeMoves"
+                name="rerollMoves<%=x%>"
+                value="yes"
+              />
+            </td>
+            <%}%> <%if (pokemonItem != "N/A"){%>
+            <td>
+              <%= pokemonItem[x] %>
+              <input
+                type="checkbox"
+                id="pokeItem"
+                name="rerollItem<%=x%>"
+                value="yes"
+              />
+            </td>
+            <td align="center">
+              <img
+                class="item-image"
+                src="<%= itemImage[x] %>"
+                alt="item image"
+              />
+            </td>
+            <%}%>
+            <td class="no-border">
+              <input type="checkbox" name="rerollAll<%=x%>" value="yes" />
+            </td>
+          </tr>
+          <%}%>
+        </table>
+        <br />
+        <input type="submit" value="Reroll" formaction="/reroll" />
+        <%}%>
+      </form>
+    </div>
+    <footer
+      class="d-flex flex-wrap justify-content-between align-items-center border-top"
+      id="bottom"
+    >
+      <div class="col-md-4 d-flex align-items-center py-3">
+        <a
+          href="/"
+          class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1"
+        >
+          <svg class="bi" width="30" height="24">
+            <use xlink:href="#bootstrap"></use>
+          </svg>
+        </a>
+        <span class="mb-3 mb-md-0 text-body-secondary"
+          >© 2023 Darren Huynh</span
+        >
+      </div>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
